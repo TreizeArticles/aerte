@@ -1,0 +1,13 @@
+<?php
+
+// ------------------------------------------------------------------------------------------------
+
+/**
+ * Implements hook_form_alter().
+ */
+function custom_contact_form_views_exposed_form_alter(&$form, $form_state, $form_id) {
+  if ($form['#id'] != 'views-exposed-form-contact-block') return;
+  
+  $form['name_list']['#options']['All'] = t('Search by country');
+  $form['keys']['#attributes']['placeholder'] = t('Search by key words');
+}

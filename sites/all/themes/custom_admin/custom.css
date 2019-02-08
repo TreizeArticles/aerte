@@ -1,0 +1,43 @@
+.media-widget input.button-remove {
+  margin-bottom: 10px;
+}
+.field-type-field-collection .button-remove {
+  float: none;
+}
+.preview .media-item {
+  height: 100%;
+  width: 100%;
+}
+.field-widget-media-generic .media-widget a.button {
+  margin: 0;
+}
+#edit-view-displays-page-options-wrapper #edit-page-style .fieldset-content {
+  padding-bottom: 10px;
+}
+.form-item-show-tagged-with input.form-text {
+  width: 700px;
+}
+.node-form .media-thumbnail .label-wrapper {
+  display: none;
+}
+.node-form .field-widget-media-generic .media-widget a.imagecrop-button {
+  margin-bottom: 10px;
+}
+.column-side .one-child label {
+  display: none;
+}
+
+
+fieldset.one-child .fieldset-wrapper  .field-type-datetime legend {
+	display:block !important;
+	position: static;
+}
+
+fieldset.one-child .fieldset-wrapper  .field-type-datetime label {
+	display:inline;
+}
+
+
+#custom-front-admin-form fieldset.one-child > .fieldset-wrapper > .form-item > label:not(.option) {
+	display: block;
+}

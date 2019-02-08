@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file custom_debug.module
+ */
+
+// ------------------------------------------------------------------------------------------------
+/**
+ * Implements hook_menu().
+ */
+function custom_debug_menu() {
+  $items['custom/debug'] = array(
+    'title' => 'Inspector',
+    'page callback' => 'custom_debug_testpage',
+    'access arguments' => array('access content'),
+    'type' => MENU_SUGGESTED_ITEM,
+  );
+
+  return $items;
+}
+
+// ------------------------------------------------------------------------------------------------
+
+function _wrapper_debug($w) {
+  $values = array();
+  foreach ($w->getPropertyInfo() as $key => $val) {
+    $values[$key] = $w->$key->value();
+  }
+  return $values;
+}
+
+// ------------------------------------------------------------------------------------------------
+
+function custom_debug_testpage() {
+}

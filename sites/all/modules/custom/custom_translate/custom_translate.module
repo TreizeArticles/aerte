@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file custom_translate.module
+ */
+
+/*
+ * Remove Field Collection on New Node Translation
+ */
+function custom_translate_entity_load($entities, $type){
+  if (arg(0) == 'node' && arg(1) == 'add' && !empty($_GET['translation'])) {
+    foreach ($entities as $id => &$entity) {
+      if (is_a($entity, 'FieldCollectionItemEntity')) {
+        $entity->item_id = '';
+      }
+    }
+  }
+}

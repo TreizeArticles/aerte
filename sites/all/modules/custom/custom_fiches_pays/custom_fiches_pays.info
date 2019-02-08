@@ -1,0 +1,5 @@
+name = Custom Fiches Pays
+description = 
+package = Administration
+core = 7.x
+

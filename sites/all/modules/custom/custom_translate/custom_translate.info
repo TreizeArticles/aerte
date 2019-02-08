@@ -1,0 +1,4 @@
+name = Custom Translate
+description = Fix Bug Field Collection Translation
+package = Custom
+core = 7.x

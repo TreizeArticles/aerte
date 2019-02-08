@@ -1,0 +1,124 @@
+<?php
+
+// ------------------------------------------------------------------------------------------------
+
+/**
+* Implements hook_block_info().
+*/
+function custom_fiches_pays_block_info() {
+	$blocks = array();
+
+	$blocks['exposed-pays'] = array(
+		'info' => t('Exposed pays'),
+	);
+
+	return $blocks;
+}
+
+// ------------------------------------------------------------------------------------------------
+
+/**
+* Implements hook_block_view().
+*/
+function custom_fiches_pays_block_view($delta = '') {
+	$block = array();
+
+	switch ($delta) {
+		case 'exposed-pays':
+			global $language;
+			$node = menu_get_object('node');
+			
+			$content = render(
+				drupal_get_form('custom_fiches_pays_form', $language->language, $node->nid)
+			);
+			$content .= render(
+				drupal_get_form('custom_fiches_question_form', $language->language, $node->nid)
+			);
+		
+			$block['subject'] = '';
+			$block['content'] = $content;
+			break;
+  }
+
+	return $block;
+}
+
+// ------------------------------------------------------------------------------------------------
+
+function custom_fiches_pays_form($form, $form_state, $language, $nid) {
+	$form = array();
+	
+	$form['element'] = array(
+		'#type' => 'select',
+		'#title' => t('Country :'),
+		'#options' => custom_fiches_get_elements('fiches_pays', $language),
+		'#default_value' => $nid
+	);
+	
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => t('Select this country'),
+	);
+	
+	$form['#submit'] = array('custom_fiches_submit');
+
+	return $form;
+}
+
+// ------------------------------------------------------------------------------------------------
+
+function custom_fiches_question_form($form, $form_state, $language, $nid) {
+	$form = array();
+
+	$form['element'] = array(
+		'#type' => 'select',
+		'#title' => t('Question :'),
+		'#options' => custom_fiches_get_elements('question', $language),
+		'#default_value' => $nid
+	);
+	
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => t('Select this question')
+	);
+	
+	$form['#submit'] = array('custom_fiches_submit');
+
+	return $form;
+}
+
+// ------------------------------------------------------------------------------------------------
+
+function custom_fiches_submit($form, $form_state) {
+	$values = $form_state['values'];
+	
+	$nid = $values['element'];
+
+	if (is_numeric($nid)) {
+		drupal_goto("node/$nid");
+	}
+}
+
+// ------------------------------------------------------------------------------------------------
+
+function custom_fiches_get_elements($type, $language) {
+	$query = db_select('node', 'n');
+	$query->fields('n', array('nid', 'title'))
+				->condition('n.status', 1)
+				->condition('n.type', $type)
+				->condition('n.language', $language)
+				->orderBy('n.title', 'ASC');
+	$results = $query->execute()->fetchAll();
+	
+	$options = array(
+		'_none' => t('- Selection -')
+	);
+	
+	if ($results) {
+		foreach ($results as $k => $v) {
+			$options[$v->nid] = $v->title;
+		}
+	}
+	
+	return $options;
+}

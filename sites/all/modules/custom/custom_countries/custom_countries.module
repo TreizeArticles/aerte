@@ -1,0 +1,26 @@
+<?php
+
+// ------------------------------------------------------------------------------------------------
+
+/**
+ * Implements hook_form_alter().
+ */
+function custom_countries_form_node_form_alter(&$form, &$form_state)
+{
+  if ($form['#id'] != 'journees-et-observatoires-node-form') return;
+
+  foreach ($form['field_pays']['und']['#options'] as $k => $v) {
+    $form['field_pays']['und']['#options'][$k] = t($v);
+  }
+}
+
+// ------------------------------------------------------------------------------------------------
+
+/**
+ * Implements hook_node_view().
+ */
+function custom_countries_node_view($node, $view_mode, $langcode) {
+	if ($node->type != 'journees_et_observatoires') return;
+  
+  $node->content['field_pays'][0]['#markup'] = t($node->content['field_pays'][0]['#markup']);
+}

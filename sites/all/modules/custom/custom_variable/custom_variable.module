@@ -1,0 +1,18 @@
+<?php
+/**
+ * Custom Variable.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function custom_variable_menu() {
+  $items['admin/config/system/custom_variable'] = array(
+    'title' => 'Custom Variables',
+    'description' => 'Custom Variables',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('variable_group_form', 'custom_variable'),
+    'access arguments' => array('administer site configuration'),
+  );
+  return $items;
+}

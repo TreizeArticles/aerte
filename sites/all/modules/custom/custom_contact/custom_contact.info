@@ -1,0 +1,5 @@
+name = Custom Contact
+description = 
+package = Administration
+core = 7.x
+

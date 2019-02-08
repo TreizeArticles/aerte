@@ -1,0 +1,7 @@
+name = Custom Variable
+description = Custom Variable
+dependencies[] = variable
+dependencies[] = variable_store
+package = Custom
+core = 7.x
+files[] = custom_variable.variable.inc

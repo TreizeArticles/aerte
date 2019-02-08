@@ -1,0 +1,5 @@
+name = Custom Debug
+description = TODO: Description of module
+package = Custom
+core = 7.x
+files[] = tests/custom_debug.test

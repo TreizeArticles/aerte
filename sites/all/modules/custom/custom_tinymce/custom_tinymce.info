@@ -1,0 +1,4 @@
+name = Custom TinyMCE
+description = Add iframe support for TinyMCE
+package = Custom
+core = 7.x

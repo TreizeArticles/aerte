@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function custom_affichespays_menu() {
+//  $items = array();
+
+  $items['fiches-pays'] = array(
+    'title' => 'Fiches Pays',
+    'page callback' => 'custom_load_page_content',
+    'access arguments' => array('access content'),
+    'type' => MENU_NORMAL_ITEM
+  );
+  return $items;
+}
+
+function custom_load_page_content(){
+  global $language;
+  if($language->language == 'fr'){
+    include 'pays/fr/affichepays.php';
+  }else{
+    include 'pays/en/affichepays.php';
+  }
+  return $htmlresult;
+}
