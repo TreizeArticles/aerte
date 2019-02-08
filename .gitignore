@@ -23,4 +23,5 @@ sites/*/settings*.php
 sites/*/files
 sites/*/files-private
 
-pays/db_config.inc.php
+pays
+pays/*
